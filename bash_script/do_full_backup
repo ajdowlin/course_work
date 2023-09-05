@@ -1,0 +1,13 @@
+#!/bin/bash
+
+source_dir="src"
+backup_dir="backup"
+
+mkdir backup
+
+timestamp=$(date +%F:%S)
+backup_file="$backup_dir/backup_$timestamp.tar.gz"
+
+tar -czf "$backup_file" "$source_dir"
+
+find "$backup_dir" -name 'backup_*.tar.gz' -type f | sort -r | tail -n +4 | xargs rm -f
